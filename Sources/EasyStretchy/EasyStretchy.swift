@@ -1,25 +1,25 @@
 import UIKit
 
-final class StretchyHeaderView: UIView {
+public class StretchyHeaderView: UIView {
 
-    enum UpEffects {
+    public enum UpEffects {
         case parrallax
         case disable
     }
 
-    enum DownEffects {
+    public enum DownEffects {
         case strechy
         case frozen
         case center
         case disable
     }
 
-    var upEffect: UpEffects = .parrallax
-    var downEffect: DownEffects = .strechy
+    public var upEffect: UpEffects = .parrallax
+    public var downEffect: DownEffects = .strechy
 
     private var observer: NSKeyValueObservation?
 
-    override func draw(_ rect: CGRect) {
+    public override func draw(_ rect: CGRect) {
         super.draw(rect)
 
         observer?.invalidate()
