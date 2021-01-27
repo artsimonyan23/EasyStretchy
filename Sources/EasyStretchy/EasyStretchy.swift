@@ -1,15 +1,16 @@
 import UIKit
 
-public class StretchyHeaderView: UIView {
+public final class StretchyHeaderView: UIView {
 
     public enum UpEffects {
         case parrallax
+        case pinned
         case disable
     }
 
     public enum DownEffects {
         case strechy
-        case frozen
+        case pinned
         case center
         case disable
     }
@@ -31,7 +32,7 @@ public class StretchyHeaderView: UIView {
                     self.transform = CGAffineTransform(scaleX: 1 - scrollView.contentOffset.y / self.bounds.height, y: 1 - scrollView.contentOffset.y / self.bounds.height)
                         .concatenating(CGAffineTransform(translationX: 0, y: scrollView.contentOffset.y / 2))
 
-                case .frozen:
+                case .pinned:
                     self.transform = CGAffineTransform(translationX: 0, y: scrollView.contentOffset.y)
 
                 case .center:
@@ -44,6 +45,9 @@ public class StretchyHeaderView: UIView {
                 switch self.upEffect {
                 case .parrallax:
                     self.transform = CGAffineTransform(translationX: 0, y: scrollView.contentOffset.y / 2)
+
+                case .pinned:
+                    self.transform = CGAffineTransform(translationX: 0, y: scrollView.contentOffset.y)
 
                 case .disable:
                     break
