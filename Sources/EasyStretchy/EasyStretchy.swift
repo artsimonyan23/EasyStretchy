@@ -33,7 +33,7 @@ public final class StretchyHeaderView: UIView {
     }
 
     private var observer: NSKeyValueObservation?
-    private weak var cell: UIView?
+    private weak var header: UIView?
 
     override public func draw(_ rect: CGRect) {
         super.draw(rect)
@@ -44,7 +44,10 @@ public final class StretchyHeaderView: UIView {
             print("\n🔴 WARNING: Header view can't be an EasyStretchyView\n")
             return
         }
-        let topInset = scrollView.adjustedContentInset.top + scrollView.contentInset.top
+        var topInset = scrollView.contentInset.top
+        if #available(iOS 11.0, *) {
+            topInset = scrollView.adjustedContentInset.top
+        }
         observer = scrollView.observe(\UIScrollView.contentOffset, options: .new) { [weak self] scrollView, _ in
             guard let self = self else { return }
             let y = scrollView.contentOffset.y + topInset
